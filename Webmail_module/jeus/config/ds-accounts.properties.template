@@ -1,0 +1,18 @@
+# Another way to configure username and password for data sources.
+# Configurations here are prior to JEUSMain.xml.
+#
+# [EXAMPLE]
+#
+#    <database>
+#       ...
+#       <data-source-id>myds</data-source-id>
+#       ...
+#       <user>user1</user>
+#       <password>passwor1</user>
+#       ...
+#
+#    Username and password for data source myds above are overwritten by
+#
+#    myds.user=use2
+#    myds.password=password2
+

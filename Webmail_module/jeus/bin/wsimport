@@ -1,0 +1,56 @@
+#!/bin/sh
+# $Id$
+
+# set up JEUS_HOME.
+if [ -z "$JEUS_HOME" ] ; then
+   PRG="$0"
+   progname=`basename "$0"`
+   saveddir=`pwd`
+
+   dirname_prg=`dirname "$PRG"`
+   cd "$dirname_prg"
+
+   while [ -h "$PRG" ] ; do
+      ls=`ls -ld "$PRG"`
+      link=`expr "$ls" : '.*-> \(.*\)$'`
+      if expr "$link" : '/.*' > /dev/null; then
+      PRG="$link"
+      else
+        PRG=`dirname "$PRG"`"/$link"
+      fi
+   done
+
+   JEUS_HOME=`dirname "$PRG"`/..
+
+   cd "$saveddir"
+
+   JEUS_HOME=`cd "$JEUS_HOME" && pwd`
+
+fi
+
+# set JEUS properties
+. "${JEUS_HOME}/bin/jeus.properties"
+
+# set boot parameter
+BOOT_PARAMETER=$*
+
+# set class path
+CLASS_PATH="${JAVA_HOME}/lib/tools.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/javaee.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jaxws-tools.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jeus.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jeus-ws.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jeusapi.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jeusjaxb.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jeusutil.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/xml_resource.jar"
+
+# set wsimport options
+WSIMPORT_OPTS=
+
+# execute wsmiport
+"${JAVA_HOME}/bin/java" -classpath "${CLASS_PATH}" ${TOOL_OPTION}       \
+    -Djava.endorsed.dirs="${JEUS_HOME}/lib/endorsed"                    \
+    ${WSIMPORT_OPTS}                                                    \
+    ${JAVA_ARGS}                                                        \
+    jeus.webservices.jaxws.tools.WsImport ${BOOT_PARAMETER}

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# $path of course has to point to the same filesystem as # where your mails are.
+
+path=/vmail/tmp/deliver.input.$$
+
+cat > $path
+
+sender=$1
+shift
+recipients=$*
+
+for recipient in $recipients; do
+  /usr/local/dovecot/libexec/dovecot/deliver -f $sender -d $recipient -p $path
+  exit=$?
+  if [ $exit != 0 ]; then
+    exit $exit
+  fi
+done
+
+rm -f $path
+
+exit 0

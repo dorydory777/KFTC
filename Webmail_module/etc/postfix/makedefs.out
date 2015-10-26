@@ -1,0 +1,15 @@
+# Do not edit -- this file documents how Postfix was built for your machine.
+SYSTYPE	= SUNOS5
+AR	= ar
+ARFL	= rv
+RANLIB	= echo
+SYSLIBS	= -lresolv -lsocket -lnsl
+CC	= gcc $(WARN) -Dstrcasecmp=fix_strcasecmp 			-Dstrncasecmp=fix_strncasecmp
+OPT	= -O
+DEBUG	= -g
+AWK	= awk
+STRCASE = strcasecmp.o
+EXPORT	= AUXLIBS='' CCARGS=' -Dstrcasecmp=fix_strcasecmp 			-Dstrncasecmp=fix_strncasecmp' OPT='-O' DEBUG='-g'
+WARN	= -Wall -Wno-comment -Wformat -Wimplicit -Wmissing-prototypes \
+	-Wparentheses -Wstrict-prototypes -Wswitch -Wuninitialized \
+	-Wunused

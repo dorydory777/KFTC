@@ -1,0 +1,50 @@
+2013-08-23 20:12:02 StandardContext[/auth]Set web app root system property: 'auth.root' = [/vmail/hauth/webapps/auth/]
+2013-08-23 20:12:02 StandardContext[/auth]Initializing Log4J from [/vmail/hauth/webapps/auth/WEB-INF/log4j.properties]
+2013-08-23 20:12:02 StandardContext[/auth]Initializing Spring root WebApplicationContext
+2013-08-23 20:12:03 StandardContext[/auth]Initializing Spring FrameworkServlet 'springapp'
+2013-08-23 20:26:24 StandardContext[/auth]Destroying Spring FrameworkServlet 'springapp'
+2013-08-23 20:26:24 StandardContext[/auth]Closing Spring root WebApplicationContext
+2013-08-23 20:26:24 StandardContext[/auth]Shutting down Log4J
+2013-08-23 20:27:20 StandardContext[/auth]Set web app root system property: 'auth.root' = [/vmail/hauth/webapps/auth/]
+2013-08-23 20:27:20 StandardContext[/auth]Initializing Log4J from [/vmail/hauth/webapps/auth/WEB-INF/log4j.properties]
+2013-08-23 20:27:20 StandardContext[/auth]Initializing Spring root WebApplicationContext
+2013-08-23 20:27:21 StandardContext[/auth]Initializing Spring FrameworkServlet 'springapp'
+2013-08-23 20:57:56 StandardContext[/auth]Destroying Spring FrameworkServlet 'springapp'
+2013-08-23 20:57:56 StandardContext[/auth]Closing Spring root WebApplicationContext
+2013-08-23 20:57:56 StandardContext[/auth]Shutting down Log4J
+2013-08-23 20:58:53 StandardContext[/auth]Set web app root system property: 'auth.root' = [/vmail/hauth/webapps/auth/]
+2013-08-23 20:58:53 StandardContext[/auth]Initializing Log4J from [/vmail/hauth/webapps/auth/WEB-INF/log4j.properties]
+2013-08-23 20:58:53 StandardContext[/auth]Initializing Spring root WebApplicationContext
+2013-08-23 20:58:54 StandardContext[/auth]Initializing Spring FrameworkServlet 'springapp'
+2013-08-23 21:24:02 StandardContext[/auth]Set web app root system property: 'auth.root' = [/vmail/hauth/webapps/auth/]
+2013-08-23 21:24:02 StandardContext[/auth]Initializing Log4J from [/vmail/hauth/webapps/auth/WEB-INF/log4j.properties]
+2013-08-23 21:24:02 StandardContext[/auth]Initializing Spring root WebApplicationContext
+2013-08-23 21:24:02 StandardContext[/auth]Initializing Spring FrameworkServlet 'springapp'
+2013-08-23 22:29:09 StandardContext[/auth]Set web app root system property: 'auth.root' = [/vmail/hauth/webapps/auth/]
+2013-08-23 22:29:09 StandardContext[/auth]Initializing Log4J from [/vmail/hauth/webapps/auth/WEB-INF/log4j.properties]
+2013-08-23 22:29:09 StandardContext[/auth]Initializing Spring root WebApplicationContext
+2013-08-23 22:29:09 StandardContext[/auth]Initializing Spring FrameworkServlet 'springapp'
+2013-08-23 22:32:53 StandardContext[/auth]Set web app root system property: 'auth.root' = [/vmail/hauth/webapps/auth/]
+2013-08-23 22:32:53 StandardContext[/auth]Initializing Log4J from [/vmail/hauth/webapps/auth/WEB-INF/log4j.properties]
+2013-08-23 22:32:53 StandardContext[/auth]Initializing Spring root WebApplicationContext
+2013-08-23 22:32:54 StandardContext[/auth]Initializing Spring FrameworkServlet 'springapp'
+2013-08-23 22:34:30 StandardContext[/auth]Set web app root system property: 'auth.root' = [/vmail/hauth/webapps/auth/]
+2013-08-23 22:34:30 StandardContext[/auth]Initializing Log4J from [/vmail/hauth/webapps/auth/WEB-INF/log4j.properties]
+2013-08-23 22:34:30 StandardContext[/auth]Initializing Spring root WebApplicationContext
+2013-08-23 22:34:30 StandardContext[/auth]Initializing Spring FrameworkServlet 'springapp'
+2013-08-23 22:46:12 StandardContext[/auth]Set web app root system property: 'auth.root' = [/vmail/hauth/webapps/auth/]
+2013-08-23 22:46:12 StandardContext[/auth]Initializing Log4J from [/vmail/hauth/webapps/auth/WEB-INF/log4j.properties]
+2013-08-23 22:46:12 StandardContext[/auth]Initializing Spring root WebApplicationContext
+2013-08-23 22:46:12 StandardContext[/auth]Initializing Spring FrameworkServlet 'springapp'
+2013-08-23 22:51:23 StandardContext[/auth]Set web app root system property: 'auth.root' = [/vmail/hauth/webapps/auth/]
+2013-08-23 22:51:23 StandardContext[/auth]Initializing Log4J from [/vmail/hauth/webapps/auth/WEB-INF/log4j.properties]
+2013-08-23 22:51:23 StandardContext[/auth]Initializing Spring root WebApplicationContext
+2013-08-23 22:51:24 StandardContext[/auth]Initializing Spring FrameworkServlet 'springapp'
+2013-08-23 23:11:08 StandardContext[/auth]Set web app root system property: 'auth.root' = [/vmail/hauth/webapps/auth/]
+2013-08-23 23:11:08 StandardContext[/auth]Initializing Log4J from [/vmail/hauth/webapps/auth/WEB-INF/log4j.properties]
+2013-08-23 23:11:09 StandardContext[/auth]Initializing Spring root WebApplicationContext
+2013-08-23 23:11:09 StandardContext[/auth]Initializing Spring FrameworkServlet 'springapp'
+2013-08-23 23:13:16 StandardContext[/auth]Set web app root system property: 'auth.root' = [/vmail/hauth/webapps/auth/]
+2013-08-23 23:13:16 StandardContext[/auth]Initializing Log4J from [/vmail/hauth/webapps/auth/WEB-INF/log4j.properties]
+2013-08-23 23:13:16 StandardContext[/auth]Initializing Spring root WebApplicationContext
+2013-08-23 23:13:17 StandardContext[/auth]Initializing Spring FrameworkServlet 'springapp'

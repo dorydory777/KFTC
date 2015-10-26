@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			    http://www.springframework.org/schema/beans/spring-beans.xsd
+			    http://www.springframework.org/schema/lang
+			    http://www.springframework.org/schema/lang/spring-lang.xsd">
+	<!--
+		START Ehcache DEFINITIONS
+		=============================================================================================
+	-->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation">
+			<value>ehcache.xml</value>
+		</property>
+		<property name="shared" value="true"/>
+	</bean>
+
+
+	<!--
+		START Thread Pool DEFINITIONS
+		=============================================================================================
+	-->
+	<bean id="executor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="maxPoolSize" value="200" />
+		<property name="queueCapacity" value="5" />
+	</bean>
+
+
+	<!--
+		START RESOURCE DEFINITIONS
+		=============================================================================================
+	-->
+	<bean id="sqlProps" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>sql.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Direct DB Pool Definition -->
+	<bean id="defaultDataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:oracle:thin:@10.51.115.3:1528:KMSKFTC</value>
+		</property>
+		<property name="username">
+			<value>intraware</value>
+		</property>
+		<property name="password">
+			<value>onetel123</value>
+		</property>
+		<property name="maxActive">
+			<value>15</value>
+		</property>
+		<property name="maxIdle">
+			<value>5</value>
+		</property>
+		<property name="maxWait">
+			<value>10000</value>
+		</property>
+		<property name="minEvictableIdleTimeMillis">
+			<value>600000</value>
+		</property>
+	</bean>
+
+	<bean id="gwServiceDao" class="com.hs.alerts.dao.GWServiceDAO">
+		<property name="dataSource">
+			<ref bean="defaultDataSource" />
+		</property>
+		<property name="sqlProps">
+			<ref bean="sqlProps" />
+		</property>
+		<property name="lobHandler">
+			<ref bean="defaultLobHandler" />
+		</property>
+	</bean>
+
+	<bean id="defaultLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" />
+	<!--
+		=========================================================================================
+	-->
+
+
+	<!--
+		START Alerts COMMANDER DEFINITIONS
+		=============================================================================================
+	-->
+	<bean id="emlCommander" class="com.hs.alerts.gathering.eml.EmlCommander">
+		<property name="taskExecutor">
+			<ref bean="executor" />
+		</property>
+		<property name="gwdao">
+			<ref bean="gwServiceDao" />
+		</property>
+		<property name="cacheManager">
+			<ref bean="cacheManager" />
+		</property>
+		<property name="mainPath" value="/vmail/notify" />
+	</bean>
+	<!--
+		=========================================================================================
+	-->
+
+
+	<!--
+		START ScheduledTimerTask DEFINITIONS
+		=============================================================================================
+	-->
+	<bean id="emlTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- run every 2 seconds -->
+		<property name="period" value="2000" />
+		<property name="timerTask" ref="emlCommander" />
+	</bean>
+	<!--
+		=========================================================================================
+	-->
+
+
+	<!--
+		START Scheduling DEFINITIONS
+		=============================================================================================
+	-->
+	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<ref bean="emlTask" />
+			</list>
+		</property>
+	</bean>
+	<!--
+		=========================================================================================
+	-->
+</beans>

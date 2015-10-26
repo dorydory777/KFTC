@@ -1,0 +1,181 @@
+#!/usr/bin/perl
+
+use strict qw( vars );
+use User::pwent;
+use URI::URL;
+use LWP::UserAgent;
+use IO::Handle;
+use warnings;
+
+# hauth.pl by Woonsan Ko, Mar. 2008.  version 1.0
+# Contact info: http://www.handysoft.co.kr
+#
+# Put the effective user name here
+#
+my $effective_user = "gw72";
+#
+# Put your HAuth URL here
+#
+my $hauth_url_info = 'http://10.51.115.11:2143/auth/auth.do';
+my $timeout_seconds = 30;
+#
+# Put forcing lowercase option when posting to URL here.
+#
+my $force_post_lowercase = 0;
+#
+# Put forcing lowercase option for user home here.
+#
+my $force_home_lowercase = 1;
+#
+# Set PROTOCOL_LEN to the max amount of input this program is 
+# willing to accept.  Considering it is only taking as input a
+# username and password, it should be pretty short.  Default for 
+# checkpassword is 512, so I set it to the same though that seems
+# ridiculously large
+#
+my $PROTOCOL_LEN = 512;
+#
+# Set LOG_YES to 1 and info on how logins are going will be written
+#
+my $LOG_YES = 1;
+#
+# Set DEBUG_YES to 1 and debug info on how logins are going will be written
+#
+my $DEBUG_YES = 1;
+#
+my $rawinput;
+my @authdata;
+my $authresult;
+#
+# I know checkpassword takes 3 params, the third being a timestamp.
+# But on descriptor 3, I am only receiving 2 params (user/pass).
+# I don't know why checkpassword gets that other one and I don't.
+#
+my $num_params = 2;
+#
+# Input comes in on descriptor 3.  That's just how it's setup. If
+# you want to write back to the client on the SMTP session (which you
+# probably don't want to do for any production system) write to fileno(STDOUT)
+#
+my $input_descriptor = 3;
+#
+# These codes from DJB's checkpassword page.
+#
+my ($resp_ok,$resp_unacceptable,$resp_misused,$resp_tempfailure) = (0,1,2,111);
+#
+# messages that get written to the qmail-smtpd log file.
+#
+my ($msg_ok, $msg_unacceptable, $msg_misused,$msg_tempfailure,
+    $msg_badhauth,$msg_hauthgeneral) =
+   ("HAUTH_INFO: Authentication Success\n",
+    "HAUTH_INFO: Authentication Failure\n",
+    "HAUTH_INFO: Received incorrect number of parameters.\n",
+    "HAUTH_ERROR: CRITICAL Something is wrong. Check HAuth server connectivity.\n",
+    "HAUTH_ERROR: CRITICAL Could not connect to HAuth Server.\n",
+    "HAUTH_ERROR: CRITICAL Message=");
+#
+my $fhin = new IO::Handle;
+my $fherr = new IO::Handle;
+
+$fhin->fdopen($input_descriptor,"r");
+$fherr->fdopen(fileno(STDERR),"w");
+
+if (($fhin->opened) && ($fherr->opened)) {
+    $fhin->read($rawinput,$PROTOCOL_LEN);
+    @authdata = split(/\0/,$rawinput);
+
+    if (scalar(@authdata) != $num_params) {
+        $LOG_YES && $fherr->print($msg_misused);
+        exit $resp_misused;
+    }
+
+    #
+    # This section is the 'bottom line' so to speak,
+    # where the yea or nay is given.
+    #
+    $authresult = &handy_auth(@authdata);
+
+    if ($authresult == $resp_ok) {
+        $LOG_YES && $fherr->print($msg_ok);
+        exec("$ARGV[0]");
+    } elsif ($authresult == $resp_unacceptable) {
+        $LOG_YES && $fherr->print($msg_unacceptable);
+    }
+    exit $authresult;
+}
+
+$DEBUG_YES && $fherr->print("DEBUG: Temporary failure!!!\n");
+$fherr->print($msg_tempfailure);
+exit $resp_tempfailure;
+
+sub handy_auth {
+    my ($username, $password) = @_;
+    my $lc_username = lc($username);
+    
+    $DEBUG_YES && $fherr->print("DEBUG: username=$username, password=$password\n");
+
+    my $hauth_url = new URI::URL("$hauth_url_info");
+    my $hauth_ua = new LWP::UserAgent;
+
+    $hauth_ua->timeout($timeout_seconds);
+    my $resp;
+    
+    if ($force_post_lowercase) {
+        $resp = $hauth_ua->post($hauth_url, {'u' => "$lc_username", 'p' => "$password"});
+    } else {
+        $resp = $hauth_ua->post($hauth_url, {'u' => "$username", 'p' => "$password"});
+    }
+    
+    if ($resp->is_success) {
+        $DEBUG_YES && $fherr->print("DEBUG: HTTP Invoke success.\n");
+
+        # Step 1: Set user's home direcotry to $HOME environment (Optional)
+        # Step 2: Set $USER environment variable. If the user name was changed,
+        #           you can tell about it to Dovecot by setting $USER to the 
+        #           changed user name.
+        # Step 3: Change the process's effective UID and GID to the user's 
+        #           UNIX UID and GID
+        #         Alternatively we can set userdb_uid and userdb_gid 
+        #           environments and add them to EXTRA environment.
+        # Step 4: This program received a path to checkpassword-reply binary 
+        #           as the first parameter. Execute it.
+
+        my $pw = getpwnam($effective_user);
+        $ENV{UID} = $pw->uid;
+        $ENV{SHELL} = $pw->shell;
+        if ($force_home_lowercase) {
+            $ENV{HOME} = "$pw->dir/$lc_username";
+            $ENV{USER} = "$lc_username";
+        } else {
+            $ENV{HOME} = "$pw->dir/$username";
+            $ENV{USER} = "$username";
+        }
+        my $out_content = $resp->content;
+        if ($out_content =~ /userdb_quota=(.+)\s/) {
+            my $userdb_quota = "$1";
+            $ENV{userdb_quota} = $userdb_quota;
+            $ENV{EXTRA} = "userdb_quota";
+        }
+        $DEBUG_YES && $fherr->print("DEBUG: ENV: $ENV{UID}, $ENV{HOME}, $ENV{SHELL}\n");
+
+        chdir $ENV{HOME};
+        $) = $pw->gid;
+        $( = $pw->gid;
+        $> = $ENV{UID};
+        $< = $ENV{UID};
+        
+        return $resp_ok;
+    } else {
+        $DEBUG_YES && $fherr->print("DEBUG: HTTP Invoke failed.\n");
+        return $resp_unacceptable;
+    }
+}
+
+sub mydie {
+    if (scalar(@_) > 0) {
+        $fherr->print($msg_hauthgeneral . $_[0] . "\n");
+    } else {
+        $fherr->print($msg_badhauth);
+    }
+    exit $resp_tempfailure;
+}

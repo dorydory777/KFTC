@@ -1,0 +1,29 @@
+#!/bin/sh
+
+REAL_JAVA_HOME=""
+
+if [ -n "$JAVA_HOME" ] ; then
+        echo "Using JAVA_HOME:       $JAVA_HOME"
+        REAL_JAVA_HOME=`cd "$JAVA_HOME"; pwd`
+else
+        echo "Please set the JAVA_HOME environment variable!"
+        exit 1
+fi
+
+CLSPATH=${REAL_JAVA_HOME}/lib/tools.jar:../classes
+for i in ../lib/*.jar ; do
+	CLSPATH=${CLSPATH}:$i
+done
+
+if [ -z "`ps -eaf |grep java |grep DMAILALERT`" ]; then
+	echo "Mail Alert Server is being started now..."
+	java -DMAILALERT \
+	-Dlog4j.configuration=file:log4j.properties \
+	-Dfile.encoding=EUC-KR \
+	-Xms256m -Xmx256m -classpath ${CLSPATH}:${CLASSPATH} \
+	com.hs.alert.AlertServerBoot 2>&1 &
+else
+	echo 
+	echo "Mail Alert Server already started"
+fi
+

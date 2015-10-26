@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+	<diskStore path="user.home/ehcache" />
+	
+	<defaultCache
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="30"
+		timeToLiveSeconds="60"
+		overflowToDisk="false"
+		diskPersistent="false"
+		memoryStoreEvictionPolicy="FIFO">
+	</defaultCache>
+	
+	<cache
+		name="emlCache"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="30"
+		timeToLiveSeconds="60"
+		overflowToDisk="false"
+		diskPersistent="false"
+		memoryStoreEvictionPolicy="FIFO"
+	/>
+</ehcache>

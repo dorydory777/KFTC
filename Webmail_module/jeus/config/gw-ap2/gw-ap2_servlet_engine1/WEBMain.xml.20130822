@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><web-container xmlns="http://www.tmaxsoft.com/xml/ns/jeus" version="6.0" xmlns:ns2="http://java.sun.com/xml/ns/javaee" xmlns:ns3="http://java.sun.com/xml/ns/persistence">
+   <context-group>
+      <group-name>MyGroup</group-name>
+      <webserver-connection>
+         <webtob-listener>
+            <listener-id>webtob1</listener-id>
+            <port>9900</port>
+            <output-buffer-size>8192</output-buffer-size>
+            <thread-pool>
+               <min>50</min>
+               <max>100</max>
+               <step>1</step>
+               <max-idle-time>30000</max-idle-time>
+            </thread-pool>
+            <webtob-address>localhost</webtob-address>
+            <registration-id>MyGroup</registration-id>
+         </webtob-listener>
+<!--
+         <http-listener>
+            <listener-id>http1</listener-id>
+            <port>9876</port>
+            <thread-pool>
+               <min>10</min>
+               <max>20</max>
+               <step>1</step>
+            </thread-pool>
+         </http-listener>
+-->
+      </webserver-connection>
+      <jsp-engine>
+<!--
+         <jsp-work-dir>/opt/jeusgw/workspace/jspwork</jsp-work-dir>
+         <compile-output-dir>/opt/jeusgw/workspace/jspwork</compile-output-dir>
+-->
+         <check-included-jspfile>true</check-included-jspfile>
+      </jsp-engine>
+      <session-config>
+         <distributable>true</distributable>
+         <shared>true</shared>
+      </session-config>
+   </context-group>
+   <logging>
+      <access-log>
+         <handler>
+            <file-handler>
+               <name>handler1</name>
+               <level>INFO</level>
+               <valid-day>1</valid-day>
+<!--
+               <buffer-size>0</buffer-size>
+-->
+            </file-handler>
+         </handler>
+      </access-log>
+   </logging>
+</web-container>

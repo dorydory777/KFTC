@@ -1,0 +1,65 @@
+#!/bin/sh
+# $Id$
+
+# set up JEUS_HOME.
+if [ -z "$JEUS_HOME" ] ; then
+   PRG="$0"
+   progname=`basename "$0"`
+   saveddir=`pwd`
+
+   dirname_prg=`dirname "$PRG"`
+   cd "$dirname_prg"
+
+   while [ -h "$PRG" ] ; do
+      ls=`ls -ld "$PRG"`
+      link=`expr "$ls" : '.*-> \(.*\)$'`
+      if expr "$link" : '/.*' > /dev/null; then
+      PRG="$link"
+      else
+        PRG=`dirname "$PRG"`"/$link"
+      fi
+   done
+
+   JEUS_HOME=`dirname "$PRG"`/..
+
+   cd "$saveddir"
+
+   JEUS_HOME=`cd "$JEUS_HOME" && pwd`
+
+fi
+
+# set JEUS properties
+. "${JEUS_HOME}/bin/jeus.properties"
+
+# set boot parameter
+BOOT_PARAMETER=$*
+
+# set classpath
+CLASS_PATH="${JAVA_HOME}/lib/tools.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/javaee.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jaxrpc-impl.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jaxrpc-spi.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jaxws-rt.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jeus.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jeusapi.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jeusjaxb.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jeusutil.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/jeus-ws.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/xmlsec.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/system/tmaxjce_jdk15x.jar"
+CLASS_PATH="${CLASS_PATH}:${JEUS_HOME}/lib/etc/ant/lib/ant.jar"
+
+# set wsdl2java options
+WSDL2JAVA_OPTS=
+
+# execute wsdl2java
+"${JAVA_HOME}/bin/java" -classpath "${CLASS_PATH}" ${TOOL_OPTION}          \
+     -Djeus.home="${JEUS_HOME}"                                            \
+     -Djeus.baseport=${JEUS_BASEPORT}                                      \
+     -Djava.endorsed.dirs="${JEUS_HOME}/lib/endorsed"                      \
+     -Djava.naming.factory.initial=jeus.jndi.JEUSContextFactory            \
+     -Djava.naming.factory.url.pkgs=jeus.jndi.jns.url                      \
+     -Djava.util.logging.config.file="${JEUS_HOME}/bin/logging.properties" \
+     ${WSDL2JAVA_OPTS}                                                     \
+     ${JAVA_ARGS}                                                          \
+     jeus.webservices.jaxrpc.tools.wscompile.Wsdl2Java ${BOOT_PARAMETER}

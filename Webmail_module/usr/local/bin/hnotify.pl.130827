@@ -1,0 +1,54 @@
+#!/usr/bin/perl
+
+use strict qw( vars );
+use User::pwent;
+use URI::URL;
+use LWP::UserAgent;
+use Encode;
+
+#
+# hnotify.pl by Woonsan Ko, Mar. 2008.  version 1.0
+# Contact info: http://www.handysoft.co.kr
+#
+# Put your HNotify URL here
+#
+#### Handy Notify client
+my $hnotify_url_info = 'http://10.51.115.1/wma/wmant.do';
+
+#### Handy Messinger Notify
+#my $hnotify_url_info = 'http://127.0.0.1/wma/wmant.do';
+
+#### Handy External Notify Deliver
+#my $hnotify_url_info = 'http://127.0.0.1:2143/auth/extnc.do';
+
+my $timeout_seconds = 30;
+
+my $msgid = $ARGV[0];
+my $user = $ARGV[1];
+my $priority = $ARGV[2];
+my $subject = $ARGV[3];
+my $from = $ARGV[4];
+my $fromid = $ARGV[5];
+
+my $hnotify_url = new URI::URL("$hnotify_url_info");
+my $hnotify_ua = new LWP::UserAgent;
+
+$hnotify_ua->timeout($timeout_seconds);
+
+$subject = encode('MIME-B',$subject);
+$from = encode('MIME-B',$from);
+
+#### OldNotify
+my $resp = $hnotify_ua->post($hnotify_url, {'acton' => 'bellnotify', 'msgid' => "$msgid", 'user' => "$user", 'from' => "$from",'subject' => "$subject", 'priority' => "$priority", 'fromid' => "$fromid"});
+
+#### Handy Messinger
+#my $resp = $hnotify_ua->post($hnotify_url, {'acton' => 'hmsnotify', 'msgid' => "$msgid", 'user' => "$user", 'from' => "$from", 'subject' => "$subject", 'priority' => "$priority", 'fromid' => "$fromid"});
+
+### Handy Ext Notify Deliver
+#my $resp = $hnotify_ua->post($hnotify_url, {'msgid' => "$msgid", 'user' => "$user", 'from' => "$from", 'subject' => "$subject", 'priority' => "$priority", 'fromid' => "$fromid"});
+
+if ($resp->is_success) {
+    print "succeeded\n";
+} else {
+    print "failed\n";
+}

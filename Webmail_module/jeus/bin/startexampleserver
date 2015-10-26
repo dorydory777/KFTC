@@ -1,0 +1,93 @@
+#!/bin/sh
+# $Id$
+
+# set up JEUS_HOME.
+if [ -z "$JEUS_HOME" ] ; then
+   PRG="$0"
+   progname=`basename "$0"`
+   saveddir=`pwd`
+
+   dirname_prg=`dirname "$PRG"`
+   cd "$dirname_prg"
+
+   while [ -h "$PRG" ] ; do
+      ls=`ls -ld "$PRG"`
+      link=`expr "$ls" : '.*-> \(.*\)$'`
+      if expr "$link" : '/.*' > /dev/null; then
+      PRG="$link"
+      else
+        PRG=`dirname "$PRG"`"/$link"
+      fi
+   done
+
+   JEUS_HOME=`dirname "$PRG"`/..
+
+   cd "$saveddir"
+
+   JEUS_HOME=`cd "$JEUS_HOME" && pwd`
+
+fi
+
+. ${JEUS_HOME}/bin/jeus-example.properties
+
+echo "***************************************************************"
+echo "                 JEUS EXAMPLE SERVER                           "
+echo " "
+echo "  - JEUS Home         : ${JEUS_HOME}                           "
+echo "  - JEUS Base Port    : ${JEUS_BASEPORT}                       "
+echo "  - Java Vendor       : ${JAVA_VENDOR}                         "
+echo "  - Added Java Option : ${JAVA_ARGS}                           "
+echo "***************************************************************"
+
+BOOT_PARAMETER=$*
+
+if [ ! -z "${USERNAME}" ]
+then
+    BOOT_PARAMETER="-U${USERNAME} -P${PASSWORD}"
+fi
+
+# start Derby for example server
+startderby &
+
+echo ${JAVA_HOME}/bin/java $VM_OPTION $SESSION_MEM                      \
+    -Xbootclasspath/p:${JEUS_HOME}/lib/system/extension.jar             \
+    -classpath ${JEUS_HOME}/lib/system/bootstrap.jar                    \
+    -Dsun.rmi.dgc.client.gcInterval=3600000                             \
+    -Dsun.rmi.dgc.server.gcInterval=3600000                             \
+    -Djava.library.path=${LD_LIBRARY_PATH}                              \
+    -Djava.endorsed.dirs=${JEUS_HOME}/lib/endorsed                      \
+    -Djava.naming.factory.initial=jeus.jndi.JNSContextFactory           \
+    -Djava.naming.factory.url.pkgs=jeus.jndi.jns.url                    \
+    -Djava.net.preferIPv4Stack=true                                     \
+    -Djava.util.logging.config.file=${JEUS_HOME}/bin/logging.properties \
+    -Djeus.home=${JEUS_HOME}                                            \
+    -Djeus.baseport=${JEUS_BASEPORT}                                    \
+    -Djeus.jvm.version=${VM_TYPE}                                       \
+    -Djeus.tm.checkReg=true                                             \
+    -Djeus.tool.webadmin.locale.language=${JEUS_LANG}                   \
+    -Djeus.properties.replicate=jeus,sun.rmi,java.util,java.net,com.sun.xml.namespace \
+    ${JAVA_ARGS}                                                        \
+    jeus.server.JeusBootstrapper ${BOOT_PARAMETER}
+
+${JAVA_HOME}/bin/java $VM_OPTION $SESSION_MEM                           \
+    -Xbootclasspath/p:${JEUS_HOME}/lib/system/extension.jar             \
+    -classpath ${JEUS_HOME}/lib/system/bootstrap.jar                    \
+    -Dsun.rmi.dgc.client.gcInterval=3600000                             \
+    -Dsun.rmi.dgc.server.gcInterval=3600000                             \
+    -Djava.library.path=${LD_LIBRARY_PATH}                              \
+    -Djava.endorsed.dirs=${JEUS_HOME}/lib/endorsed                      \
+    -Djava.naming.factory.initial=jeus.jndi.JNSContextFactory           \
+    -Djava.naming.factory.url.pkgs=jeus.jndi.jns.url                    \
+    -Djava.net.preferIPv4Stack=true                                     \
+    -Djava.util.logging.config.file=${JEUS_HOME}/bin/logging.properties \
+    -Djeus.home=${JEUS_HOME}                                            \
+    -Djeus.baseport=${JEUS_BASEPORT}                                    \
+    -Djeus.jvm.version=${VM_TYPE}                                       \
+    -Djeus.tm.checkReg=true                                             \
+    -Djeus.tool.webadmin.locale.language=${JEUS_LANG}                   \
+    -Djeus.properties.replicate=jeus,sun.rmi,java.util,java.net,com.sun.xml.namespace \
+    ${JAVA_ARGS}                                                        \
+    jeus.server.JeusBootstrapper ${BOOT_PARAMETER}
+
+# shut down Derby
+stopderby

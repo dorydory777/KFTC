@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:lang="http://www.springframework.org/schema/lang" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+                           http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
+
+    <bean id="dataSource" destroy-method="close"
+          class="org.apache.commons.dbcp.BasicDataSource">
+		<!-- configuration for Oracle -->
+	<property name="driverClassName">
+            <value>oracle.jdbc.driver.OracleDriver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:oracle:thin:@10.51.115.21:1528:KMSKFTC</value>
+        </property>
+        <property name="username"><value>INTRAWARE</value></property>
+        <property name="password"><value>onetel123</value></property>
+		<property name="maxActive"><value>40</value></property>
+        <property name="maxIdle"><value>1</value></property>
+        <property name="maxWait"><value>10000</value></property>
+        <property name="minEvictableIdleTimeMillis"><value>600000</value></property>
+    </bean>
+    
+   	<bean id="actions" class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		<property name="paramName" value="acton" />
+		<property name="defaultMethodName" value="error" />
+	</bean>
+
+    <!-- ========================= CONTROLLER DEFINITIONS ========================= -->
+    <bean id="urlMapping" 
+          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+        	<props>
+				<prop key="auth.do">authController</prop>
+				<prop key="extnc.do">extNotifyController</prop>
+				<prop key="sieve.do">SieveController</prop>
+				<prop key="mb.do">MailboxController</prop>
+			</props>
+        </property>
+    </bean>
+	<bean id="extNotifyController" class="com.hs.auth.ExtNotifyController">
+		<property name="uri" value="http://10.51.115.23/wma/wmant.do?acton=bellnotify"/>
+	</bean>
+    <bean id="authController" class="com.hs.auth.AuthController">
+    	<property name="dataSource"><ref bean="dataSource"/></property>
+        <property name="encryptMode" value="false" />
+        <property name="adminName" value="cyrus" />
+        <property name="adminPasswd" value="1" />
+		<property name="sqlUser">
+			<!-- Use Imap Login by mailboxname (default) -->
+			<!--value>
+				SELECT user_id, login_passwd AS passwd, capacity,
+      				   SUBSTR (e_mail, 0, INSTR (e_mail, '@') - 1) AS mboxname, e_mail
+				  FROM usr_global
+				 WHERE user_id = (SELECT MAX (user_id) AS ID
+				                       FROM usr_global
+				                      WHERE e_mail LIKE ?||'@%'
+				                        AND status &lt;&gt; '4')
+			</value-->
+			<!-- Use Imap Login by e_mail -->
+			<value>
+				SELECT user_id, login_passwd AS passwd, capacity,
+      				   SUBSTR (e_mail, 0, INSTR (e_mail, '@') - 1) AS mboxname, e_mail
+				  FROM usr_global
+				 WHERE user_id = (SELECT MAX (user_id) AS ID
+				                       FROM usr_global
+				                      WHERE e_mail = ?
+				                        AND status &lt;&gt; '4')
+			</value>
+		</property>
+    </bean>
+    
+    <bean id="SieveController" class="com.hs.auth.SieveController">
+    	<property name="methodNameResolver">
+			<ref bean="actions" />
+		</property>
+		<property name="sieveHome" value="/vmail"/>
+		<property name="notifySieveString">
+			<value>
+notify :method "exec" :options ["/usr/local/bin/hnotify.pl"];
+			</value>
+		</property>
+		<property name="externalSieveString">
+			<value>
+notify :method "exec" :options ["/usr/local/bin/hextforward.pl"];
+			</value>
+		</property>
+	</bean>
+	
+	<bean id="MailboxController" class="com.hs.auth.MailboxController">
+		<property name="methodNameResolver">
+			<ref bean="actions" />
+		</property>
+		<property name="storeHome">
+			<value>/vmail</value>
+		</property>
+		<property name="forceDelete" value="false" />
+		<property name="loginEmail" value="false" />
+		<property name="allowAddresses">
+			<list>
+				<value>127.0.0.1</value>
+			</list>
+			
+		</property>
+	</bean>
+</beans>

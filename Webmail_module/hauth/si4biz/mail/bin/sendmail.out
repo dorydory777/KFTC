@@ -1,0 +1,116 @@
+start
+[2013-06-14 19:01:02] [SmtpUtil.java.<init>(55)][main] [INFO ] send mail start 1371204062099 
+[2013-06-14 19:01:03] [SmtpUtil.java.send(457)][main] [INFO ] 4 건의 문서제목을 발송합니다. TO=chris_kwon@kftc.or.kr 
+[2013-06-14 19:01:03] [SmtpUtil.java.send(474)][main] [INFO ] approval send OK true 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(625)][Thread-0] [INFO ] chris_kwon@kftc.or.krConnect... OK 220 (Bee-Hive MTA 2.5.0) service ready Fri, 14 Jun 2013 19:01:03 +0900 (KST) 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(636)][Thread-0] [INFO ] chris_kwon@kftc.or.krHELO... OK 250  Hello 192.168.106.83(10.51.115.2[10.51.115.2]) 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(647)][Thread-0] [INFO ] chris_kwon@kftc.or.krFROM... OK 250 OK 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(658)][Thread-0] [INFO ] chris_kwon@kftc.or.krRCPT... OK 250 OK 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(668)][Thread-0] [INFO ] chris_kwon@kftc.or.krDATA... OK 354 start mail input: end with <CRLF>.<CRLF> 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(691)][Thread-0] [INFO ] chris_kwon@kftc.or.krSEND... OK 250 request mail action okay, completed 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(707)][Thread-0] [INFO ] chris_kwon@kftc.or.kr RESULT=true null [원텔 결재] 부재중 결재 진행중인 문서 목록입니다.                     <HTML><BODY><html><body>원텔에서 결재 진행중인 결재문서 목록 입니다.<br>                   <br>&nbsp;&nbsp;&nbsp;-업무용PC의 웹메일 이용 안내<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;권혁진<br>&nbsp;&nbsp;&nbsp;-격일제근무명령(확인)서(근무일자:20...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;권혁진<br>&nbsp;&nbsp;&nbsp;-조출, 휴일 및 연장(고정) 근무명령...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;권혁진<br>&nbsp;&nbsp;&nbsp;-조출, 휴일 및 연장(고정) 근무명령...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;권혁진</BODY></HTML>
+
+ 
+[2013-06-14 19:01:03] [SmtpUtil.java.send(397)][main] [INFO ] 0 건의 받은 메일제목을 발송합니다. TO=hjlee@kftc.or.kr 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(625)][Thread-1] [INFO ] hjlee@kftc.or.krConnect... OK 220 (Bee-Hive MTA 2.5.0) service ready Fri, 14 Jun 2013 19:01:03 +0900 (KST) 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(636)][Thread-1] [INFO ] hjlee@kftc.or.krHELO... OK 250  Hello 192.168.106.83(10.51.115.2[10.51.115.2]) 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(647)][Thread-1] [INFO ] hjlee@kftc.or.krFROM... OK 250 OK 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(658)][Thread-1] [INFO ] hjlee@kftc.or.krRCPT... OK 250 OK 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(668)][Thread-1] [INFO ] hjlee@kftc.or.krDATA... OK 354 start mail input: end with <CRLF>.<CRLF> 
+[2013-06-14 19:01:03] [SmtpUtil.java.send(397)][main] [INFO ] 0 건의 받은 메일제목을 발송합니다. TO=swnam@kftc.or.kr 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(625)][Thread-2] [INFO ] swnam@kftc.or.krConnect... OK 220 (Bee-Hive MTA 2.5.0) service ready Fri, 14 Jun 2013 19:01:03 +0900 (KST) 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(636)][Thread-2] [INFO ] swnam@kftc.or.krHELO... OK 250  Hello 192.168.106.83(10.51.115.2[10.51.115.2]) 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(647)][Thread-2] [INFO ] swnam@kftc.or.krFROM... OK 250 OK 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(658)][Thread-2] [INFO ] swnam@kftc.or.krRCPT... OK 250 OK 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(668)][Thread-2] [INFO ] swnam@kftc.or.krDATA... OK 354 start mail input: end with <CRLF>.<CRLF> 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(691)][Thread-1] [INFO ] hjlee@kftc.or.krSEND... OK 250 request mail action okay, completed 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(707)][Thread-1] [INFO ] hjlee@kftc.or.kr RESULT=true null [원텔 메일] 부재중 수신 메일 목록입니다.                 <HTML><BODY>원텔에서 수신한 메일 목록 입니다.
+              </BODY></HTML>
+
+ 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(691)][Thread-2] [INFO ] swnam@kftc.or.krSEND... OK 250 request mail action okay, completed 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(707)][Thread-2] [INFO ] swnam@kftc.or.kr RESULT=true null [원텔 메일] 부재중 수신 메일 목록입니다.                 <HTML><BODY>원텔에서 수신한 메일 목록 입니다.
+              </BODY></HTML>
+
+ 
+[2013-06-14 19:01:03] [SmtpUtil.java.send(397)][main] [INFO ] 0 건의 받은 메일제목을 발송합니다. TO=jhshin@kftc.or.kr 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(625)][Thread-3] [INFO ] jhshin@kftc.or.krConnect... OK 220 (Bee-Hive MTA 2.5.0) service ready Fri, 14 Jun 2013 19:01:03 +0900 (KST) 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(636)][Thread-3] [INFO ] jhshin@kftc.or.krHELO... OK 250  Hello 192.168.106.83(10.51.115.2[10.51.115.2]) 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(647)][Thread-3] [INFO ] jhshin@kftc.or.krFROM... OK 250 OK 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(658)][Thread-3] [INFO ] jhshin@kftc.or.krRCPT... OK 250 OK 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(668)][Thread-3] [INFO ] jhshin@kftc.or.krDATA... OK 354 start mail input: end with <CRLF>.<CRLF> 
+[2013-06-14 19:01:03] [SmtpUtil.java.send(397)][main] [INFO ] 0 건의 받은 메일제목을 발송합니다. TO=sysdef@kftc.or.kr 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(625)][Thread-4] [INFO ] sysdef@kftc.or.krConnect... OK 220 (Bee-Hive MTA 2.5.0) service ready Fri, 14 Jun 2013 19:01:03 +0900 (KST) 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(636)][Thread-4] [INFO ] sysdef@kftc.or.krHELO... OK 250  Hello 192.168.106.83(10.51.115.2[10.51.115.2]) 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(647)][Thread-4] [INFO ] sysdef@kftc.or.krFROM... OK 250 OK 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(658)][Thread-4] [INFO ] sysdef@kftc.or.krRCPT... OK 250 OK 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(668)][Thread-4] [INFO ] sysdef@kftc.or.krDATA... OK 354 start mail input: end with <CRLF>.<CRLF> 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(691)][Thread-3] [INFO ] jhshin@kftc.or.krSEND... OK 250 request mail action okay, completed 
+[2013-06-14 19:01:03] [SmtpUtil.java.sendSocket(707)][Thread-3] [INFO ] jhshin@kftc.or.kr RESULT=true null [원텔 메일] 부재중 수신 메일 목록입니다.                 <HTML><BODY>원텔에서 수신한 메일 목록 입니다.
+              </BODY></HTML>
+
+ 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(691)][Thread-4] [INFO ] sysdef@kftc.or.krSEND... OK 250 request mail action okay, completed 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(707)][Thread-4] [INFO ] sysdef@kftc.or.kr RESULT=true null [원텔 메일] 부재중 수신 메일 목록입니다.                 <HTML><BODY>원텔에서 수신한 메일 목록 입니다.
+              </BODY></HTML>
+
+ 
+[2013-06-14 19:01:04] [SmtpUtil.java.send(397)][main] [INFO ] 0 건의 받은 메일제목을 발송합니다. TO=sikim@kftc.or.kr 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(625)][Thread-5] [INFO ] sikim@kftc.or.krConnect... OK 220 (Bee-Hive MTA 2.5.0) service ready Fri, 14 Jun 2013 19:01:04 +0900 (KST) 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(636)][Thread-5] [INFO ] sikim@kftc.or.krHELO... OK 250  Hello 192.168.106.83(10.51.115.2[10.51.115.2]) 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(647)][Thread-5] [INFO ] sikim@kftc.or.krFROM... OK 250 OK 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(658)][Thread-5] [INFO ] sikim@kftc.or.krRCPT... OK 250 OK 
+[2013-06-14 19:01:04] [SmtpUtil.java.send(397)][main] [INFO ] 0 건의 받은 메일제목을 발송합니다. TO=graylynx@kftc.or.kr 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(668)][Thread-5] [INFO ] sikim@kftc.or.krDATA... OK 354 start mail input: end with <CRLF>.<CRLF> 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(625)][Thread-6] [INFO ] graylynx@kftc.or.krConnect... OK 220 (Bee-Hive MTA 2.5.0) service ready Fri, 14 Jun 2013 19:01:04 +0900 (KST) 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(636)][Thread-6] [INFO ] graylynx@kftc.or.krHELO... OK 250  Hello 192.168.106.83(10.51.115.2[10.51.115.2]) 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(647)][Thread-6] [INFO ] graylynx@kftc.or.krFROM... OK 250 OK 
+[2013-06-14 19:01:04] [SmtpUtil.java.send(397)][main] [INFO ] 0 건의 받은 메일제목을 발송합니다. TO=woo39@kftc.or.kr 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(658)][Thread-6] [INFO ] graylynx@kftc.or.krRCPT... OK 250 OK 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(668)][Thread-6] [INFO ] graylynx@kftc.or.krDATA... OK 354 start mail input: end with <CRLF>.<CRLF> 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(625)][Thread-7] [INFO ] woo39@kftc.or.krConnect... OK 220 (Bee-Hive MTA 2.5.0) service ready Fri, 14 Jun 2013 19:01:04 +0900 (KST) 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(636)][Thread-7] [INFO ] woo39@kftc.or.krHELO... OK 250  Hello 192.168.106.83(10.51.115.2[10.51.115.2]) 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(647)][Thread-7] [INFO ] woo39@kftc.or.krFROM... OK 250 OK 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(658)][Thread-7] [INFO ] woo39@kftc.or.krRCPT... OK 250 OK 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(668)][Thread-7] [INFO ] woo39@kftc.or.krDATA... OK 354 start mail input: end with <CRLF>.<CRLF> 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(691)][Thread-5] [INFO ] sikim@kftc.or.krSEND... OK 250 request mail action okay, completed 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(707)][Thread-5] [INFO ] sikim@kftc.or.kr RESULT=true null [원텔 메일] 부재중 수신 메일 목록입니다.                 <HTML><BODY>원텔에서 수신한 메일 목록 입니다.
+              </BODY></HTML>
+
+ 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(691)][Thread-6] [INFO ] graylynx@kftc.or.krSEND... OK 250 request mail action okay, completed 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(707)][Thread-6] [INFO ] graylynx@kftc.or.kr RESULT=true null [원텔 메일] 부재중 수신 메일 목록입니다.                 <HTML><BODY>원텔에서 수신한 메일 목록 입니다.
+              </BODY></HTML>
+
+ 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(691)][Thread-7] [INFO ] woo39@kftc.or.krSEND... OK 250 request mail action okay, completed 
+[2013-06-14 19:01:04] [SmtpUtil.java.sendSocket(707)][Thread-7] [INFO ] woo39@kftc.or.kr RESULT=true null [원텔 메일] 부재중 수신 메일 목록입니다.                 <HTML><BODY>원텔에서 수신한 메일 목록 입니다.
+              </BODY></HTML>
+
+ 
+[2013-06-14 19:01:06] [SmtpUtil.java.send(397)][main] [INFO ] 5 건의 받은 메일제목을 발송합니다. TO=chris_kwon@kftc.or.kr 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(625)][Thread-8] [INFO ] chris_kwon@kftc.or.krConnect... OK 220 (Bee-Hive MTA 2.5.0) service ready Fri, 14 Jun 2013 19:01:06 +0900 (KST) 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(636)][Thread-8] [INFO ] chris_kwon@kftc.or.krHELO... OK 250  Hello 192.168.106.83(10.51.115.2[10.51.115.2]) 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(647)][Thread-8] [INFO ] chris_kwon@kftc.or.krFROM... OK 250 OK 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(658)][Thread-8] [INFO ] chris_kwon@kftc.or.krRCPT... OK 250 OK 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(668)][Thread-8] [INFO ] chris_kwon@kftc.or.krDATA... OK 354 start mail input: end with <CRLF>.<CRLF> 
+[2013-06-14 19:01:06] [SmtpUtil.java.send(397)][main] [INFO ] 1 건의 받은 메일제목을 발송합니다. TO=koyangee@kftc.or.kr 
+[2013-06-14 19:01:06] [SmtpUtil.java.send(409)][main] [INFO ] webmail send OK true 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(625)][Thread-9] [INFO ] koyangee@kftc.or.krConnect... OK 220 (Bee-Hive MTA 2.5.0) service ready Fri, 14 Jun 2013 19:01:06 +0900 (KST) 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(691)][Thread-8] [INFO ] chris_kwon@kftc.or.krSEND... OK 250 request mail action okay, completed 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(636)][Thread-9] [INFO ] koyangee@kftc.or.krHELO... OK 250  Hello 192.168.106.83(10.51.115.2[10.51.115.2]) 
+end true
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(707)][Thread-8] [INFO ] chris_kwon@kftc.or.kr RESULT=true null [원텔 메일] 부재중 수신 메일 목록입니다.                 <HTML><BODY>원텔에서 수신한 메일 목록 입니다.
+              <br>&nbsp;&nbsp;- 【동기회】일타이피<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Fri, 14 Jun 2013 13:21:34 +0900 (KST)]  from 김소이 <soyeekim@kftc.or.kr><br>&nbsp;&nbsp;- 2시 팀회의합니다.(냉무)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Fri, 14 Jun 2013 13:43:59 +0900 (KST)]  from 오은숙 <esoh@kftc.or.kr><br>&nbsp;&nbsp;- [전달] 3시로...(냉무)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Fri, 14 Jun 2013 13:44:54 +0900 (KST)]  from 오은숙 <esoh@kftc.or.kr><br>&nbsp;&nbsp;- CLS공동망 및 국내 외화자금이체 중...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Fri, 14 Jun 2013 15:52:53 +0900 (KST)]  from 차우근 <necman@kftc.or.kr><br>&nbsp;&nbsp;- 상반기 인사관련<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Fri, 14 Jun 2013 16:00:34 +0900 (KST)]  from 이근황 <leesang@kftc.or.kr></BODY></HTML>
+
+ 
+[2013-06-14 19:01:06] [SmtpUtil.java.close(155)][main] [INFO ] send mail end [4496 ms] 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(647)][Thread-9] [INFO ] koyangee@kftc.or.krFROM... OK 250 OK 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(658)][Thread-9] [INFO ] koyangee@kftc.or.krRCPT... OK 250 OK 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(668)][Thread-9] [INFO ] koyangee@kftc.or.krDATA... OK 354 start mail input: end with <CRLF>.<CRLF> 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(691)][Thread-9] [INFO ] koyangee@kftc.or.krSEND... OK 250 request mail action okay, completed 
+[2013-06-14 19:01:06] [SmtpUtil.java.sendSocket(707)][Thread-9] [INFO ] koyangee@kftc.or.kr RESULT=true null [원텔 메일] 부재중 수신 메일 목록입니다.                 <HTML><BODY>원텔에서 수신한 메일 목록 입니다.
+              <br>&nbsp;&nbsp;- 점검대상 부서별 구분 및 오라클 점검...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Fri, 14 Jun 2013 14:55:44 +0900 (KST)]  from 채종명 <lodestar@kftc.or.kr></BODY></HTML>
+
+ 
+Fri Jun 14 19:01:06 KST 2013

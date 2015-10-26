@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ -z "`ps -eaf | grep java|grep DMAILALERT`" ]; then
+	echo "Mail Alert Server was not started."
+else
+	ps -eaf | grep java | grep DMAILALERT | awk '{print $2}' |
+	while read PID
+		do 
+		echo "Killing $PID ..."
+		kill -9 $PID
+		echo 
+		echo "Mail Alert Server is being shutdowned."
+		done
+fi
+
